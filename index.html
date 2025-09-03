@@ -21,6 +21,7 @@
       font-size: 24px;
       text-align: center;
       text-shadow: 0 0 10px black;
+      cursor: pointer;
     }
     video {
       position: fixed;
@@ -31,24 +32,21 @@
       object-fit: cover;
       z-index: -1;
     }
-    #text, #weronika {
+    #text, #weronika, #clickable {
       background: rgba(0,0,0,0.5);
       padding: 10px 20px;
       border-radius: 12px;
       margin: 10px 0;
     }
     #clickable {
-      cursor: pointer;
-      background: rgba(0,0,0,0.7);
-      padding: 12px 25px;
-      border-radius: 15px;
-      margin-top: 20px;
       font-weight: bold;
     }
-    .heart {
+    .flying {
       position: fixed;
       bottom: 0;
-      font-size: 30px;
+      width: 40px;  /* wielkość obrazka (jak serduszko) */
+      height: 40px;
+      border-radius: 50%; /* opcjonalnie, żeby było okrągłe */
       animation: floatUp 3s linear forwards;
     }
     @keyframes floatUp {
@@ -58,7 +56,6 @@
   </style>
 </head>
 <body>
-  <!-- ✅ poprawione video -->
   <video autoplay loop muted playsinline>
     <source src="dawid-jasper.mp4" type="video/mp4">
     Twoja przeglądarka nie obsługuje wideo.
@@ -66,22 +63,19 @@
 
   <div id="weronika"><strong>Weronika:</strong> powiedziałbyś mi w końcu coś miłego</div>
   <div id="text"><strong>ja:</strong> bezrobocie, renta, zasiłek</div>
-  <div id="clickable">kliknij na Dawida Jaspra jeśli kochasz Kacpra ❤️</div>
+  <div id="clickable">kliknij na Dawida Jaspera jeśli kochasz Kacpra ❤️</div>
 
   <script>
-    const clickable = document.getElementById("clickable");
-
-    clickable.addEventListener("click", () => {
+    document.body.addEventListener("click", () => {
       for (let i = 0; i < 7; i++) {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.color = "red";
-        heart.innerHTML = "❤️";
-        document.body.appendChild(heart);
+        const img = document.createElement("img");
+        img.src = "avatar.png"; // 👈 tu podaj nazwę swojego zdjęcia
+        img.classList.add("flying");
+        img.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(img);
 
         setTimeout(() => {
-          heart.remove();
+          img.remove();
         }, 3000);
       }
     });
