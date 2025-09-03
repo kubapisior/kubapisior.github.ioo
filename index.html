@@ -57,7 +57,7 @@
   </style>
 </head>
 <body>
-  <video autoplay loop muted playsinline preload="auto">
+  <video id="bgVideo" autoplay loop muted playsinline preload="auto">
     <source src="dawid-jasper.mp4" type="video/mp4">
     Twoja przeglądarka nie obsługuje wideo.
   </video>
@@ -67,14 +67,21 @@
   <div id="clickable">kliknij na Dawida Jaspera jeśli kochasz Kacpra ❤️</div>
 
   <script>
-    // Kliknięcie w dowolne miejsce na stronie
+    const video = document.getElementById("bgVideo");
+
+    // Wymuszamy start filmu po pierwszym kliknięciu (dla telefonów)
     document.addEventListener("click", () => {
+      if (video.paused) {
+        video.play().catch(err => console.log("Autoplay zablokowany:", err));
+      }
+
+      // Tworzenie lecących obrazków
       for (let i = 0; i < 7; i++) {
         const heart = document.createElement("img");
-        heart.src = "avatar.png"; // <- TU dajesz nazwę swojego obrazka
+        heart.src = "avatar.png"; // <- TU wrzucasz swój obrazek
         heart.classList.add("heart");
         heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.width = "40px"; // wielkość obrazka
+        heart.style.width = "40px"; // rozmiar obrazka
         document.body.appendChild(heart);
 
         setTimeout(() => {
