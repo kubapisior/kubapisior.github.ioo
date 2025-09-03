@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Dawid Jasper & Weronika</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      text-shadow: 0 0 10px black;
+    }
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    #text, #weronika {
+      background: rgba(0,0,0,0.5);
+      padding: 10px 20px;
+      border-radius: 12px;
+      margin: 10px 0;
+    }
+    #clickable {
+      cursor: pointer;
+      background: rgba(0,0,0,0.7);
+      padding: 12px 25px;
+      border-radius: 15px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .heart {
+      position: fixed;
+      bottom: 0;
+      font-size: 30px;
+      animation: floatUp 3s linear forwards;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay loop muted playsinline>
+    <source src="dawid-jasper.mp4" type="video/mp4">
+    Twoja przeglądarka nie obsługuje wideo.
+  </video>
+
+  <div id="weronika"><strong>Weronika:</strong> powiedziałbyś mi w końcu coś miłego</div>
+  <div id="text"><strong>ja:</strong> bezrobocie, renta, zasiłek</div>
+  <div id="clickable">kliknij na Dawida Jaspra jeśli kochasz Kacpra ❤️</div>
+
+  <script>
+    const clickable = document.getElementById("clickable");
+
+    clickable.addEventListener("click", () => {
+      for (let i = 0; i < 7; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.color = "red";
+        heart.innerHTML = "❤️";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
