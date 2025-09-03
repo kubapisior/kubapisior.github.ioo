@@ -21,7 +21,6 @@
       font-size: 24px;
       text-align: center;
       text-shadow: 0 0 10px black;
-      cursor: pointer;
     }
     video {
       position: fixed;
@@ -32,21 +31,23 @@
       object-fit: cover;
       z-index: -1;
     }
-    #text, #weronika, #clickable {
+    #text, #weronika {
       background: rgba(0,0,0,0.5);
       padding: 10px 20px;
       border-radius: 12px;
       margin: 10px 0;
     }
     #clickable {
+      cursor: pointer;
+      background: rgba(0,0,0,0.7);
+      padding: 12px 25px;
+      border-radius: 15px;
+      margin-top: 20px;
       font-weight: bold;
     }
-    .flying {
+    .heart {
       position: fixed;
       bottom: 0;
-      width: 40px;  /* wielkość obrazka (jak serduszko) */
-      height: 40px;
-      border-radius: 50%; /* opcjonalnie, żeby było okrągłe */
       animation: floatUp 3s linear forwards;
     }
     @keyframes floatUp {
@@ -56,7 +57,7 @@
   </style>
 </head>
 <body>
-  <video autoplay loop muted playsinline>
+  <video autoplay loop muted playsinline preload="auto">
     <source src="dawid-jasper.mp4" type="video/mp4">
     Twoja przeglądarka nie obsługuje wideo.
   </video>
@@ -66,16 +67,18 @@
   <div id="clickable">kliknij na Dawida Jaspera jeśli kochasz Kacpra ❤️</div>
 
   <script>
-    document.body.addEventListener("click", () => {
+    // Kliknięcie w dowolne miejsce na stronie
+    document.addEventListener("click", () => {
       for (let i = 0; i < 7; i++) {
-        const img = document.createElement("img");
-        img.src = "avatar.png"; // 👈 tu podaj nazwę swojego zdjęcia
-        img.classList.add("flying");
-        img.style.left = Math.random() * window.innerWidth + "px";
-        document.body.appendChild(img);
+        const heart = document.createElement("img");
+        heart.src = "avatar.png"; // <- TU dajesz nazwę swojego obrazka
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.width = "40px"; // wielkość obrazka
+        document.body.appendChild(heart);
 
         setTimeout(() => {
-          img.remove();
+          heart.remove();
         }, 3000);
       }
     });
